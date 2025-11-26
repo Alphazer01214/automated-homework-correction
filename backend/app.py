@@ -1,16 +1,117 @@
-# 这是一个示例 Python 脚本。
+# app.py
+from flask import Flask, request, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from flask_cors import CORS
+import uuid
+import os
+from datetime import datetime
 
-# 按 Shift+F10 执行或将其替换为您的代码。
-# 按 双击 Shift 在所有地方搜索类、文件、工具窗口、操作和设置。
+# ==========================
+# 配置
+# ==========================
+app = Flask(__name__)
+CORS(app)
+
+# 数据库配置
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///assignments.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# 文件上传路径
+UPLOAD_FOLDER = './uploads'
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+db = SQLAlchemy(app)
 
 
-def print_hi(name):
-    # 在下面的代码行中使用断点来调试脚本。
-    print(f'Hi, {name}')  # 按 Ctrl+F8 切换断点。
+# 数据库模型
+class Assignment(db.Model):
+    id = db.Column(db.String, primary_key=True)
+    user_id = db.Column(db.String, nullable=True)
+    subject = db.Column(db.String, nullable=False)
+    assignment_type = db.Column(db.String, nullable=False)
+    content = db.Column(db.JSON, nullable=False)
+    result = db.Column(db.JSON, nullable=True)
+    status = db.Column(db.String, default='pending')
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
 
-# 按装订区域中的绿色按钮以运行脚本。
+# 初始化数据库
+with app.app_context():
+    db.create_all()
+
+# 根路由（仅测试用）
+@app.route('/')
+def index():
+    """
+    测试用，后续需要通过axios实现前后端沟通
+    :return:
+    """
+    return "Hello World"
+
+
+# 学科接口
+@app.route('/api/subjects', methods=['GET'])
+def get_subjects():
+    """
+    获取学科信息
+    :return:
+    """
+    subjects = [
+        {
+            "id": "math",
+            "name": "数学",
+            "description": "数学作业批改",
+            "supported_types": ["calculation", "proof", "application"]
+        },
+        {
+            "id": "chinese",
+            "name": "语文",
+            "description": "语文作业批改",
+            "supported_types": ["composition", "reading", "poetry"]
+        },
+        {
+            "id": "english",
+            "name": "英语",
+            "description": "英语作业批改",
+            "supported_types": ["composition", "reading", "translation"]
+        }
+    ]
+    return jsonify({"success": True, "data": {"subjects": subjects}})
+
+
+
+# 作业提交接口
+@app.route('/api/assignments/submit', methods=['POST'])
+def submit_assignment():
+    """
+    提交作业并存入数据库，需要调用LLM API
+    注意：存在异步操作，提交后不等待LLM返回，后续若LLM有回应则存入数据库中，后续要获取批改结果直接由assignment_id从数据库中搜索
+    :return: {status, assignment_id}
+    """
+
+
+# 获取批改结果
+@app.route('/api/assignments/<assignment_id>/result', methods=['GET'])
+def get_result(assignment_id):
+    """
+    从数据库中获取结果
+    :param assignment_id:
+    :return: {status, data}，data是数据库中的内容
+    """
+
+
+# 文件上传接口
+@app.route('/api/files/upload', methods=['POST'])
+def upload_file():
+    """
+    文件上传
+    :return: {status, file_path}
+    """
+
+
+# ==========================
+# 启动 Flask
+# ==========================
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# 访问 https://www.jetbrains.com/help/pycharm/ 获取 PyCharm 帮助
+    app.run(debug=True)

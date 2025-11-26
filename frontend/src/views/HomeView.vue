@@ -1,9 +1,9 @@
+<!--这是首页，可以写网站介绍之类的-->
+
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+<h1>这是首页，可以写网站介绍之类的</h1>
 </template>
