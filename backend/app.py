@@ -1,10 +1,12 @@
 # app.py
+import json
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 import uuid
 import os
 from datetime import datetime
+from dotenv import load_dotenv
 
 # ==========================
 # 配置
@@ -35,7 +37,6 @@ class Assignment(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-
 # 初始化数据库
 with app.app_context():
     db.create_all()
@@ -57,28 +58,12 @@ def get_subjects():
     获取学科信息
     :return:
     """
-    subjects = [
-        {
-            "id": "math",
-            "name": "数学",
-            "description": "数学作业批改",
-            "supported_types": ["calculation", "proof", "application"]
-        },
-        {
-            "id": "chinese",
-            "name": "语文",
-            "description": "语文作业批改",
-            "supported_types": ["composition", "reading", "poetry"]
-        },
-        {
-            "id": "english",
-            "name": "英语",
-            "description": "英语作业批改",
-            "supported_types": ["composition", "reading", "translation"]
-        }
-    ]
-    return jsonify({"success": True, "data": {"subjects": subjects}})
-
+    try:
+        with open('./data/subjects.json', 'r', encoding='utf-8') as f:
+            subjects = json.load(f)
+            return jsonify({"success": True, "data": {"subjects": subjects}})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)})
 
 
 # 作业提交接口

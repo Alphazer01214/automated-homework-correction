@@ -25,6 +25,7 @@ service.interceptors.request.use(
 
 // 响应拦截器
 service.interceptors.response.use(
+  // 拦截器：拦截失败的请求
   response => {
     const res = response.data;
     // 这里根据后端返回的 success 字段判断业务逻辑是否成功

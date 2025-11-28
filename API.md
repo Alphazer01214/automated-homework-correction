@@ -190,7 +190,7 @@ Content-Type: multipart/form-data 或 application/json
 **请求体**:
 ```json
 {
-  "subject_id": "math | chinese | english, required",
+  "subject": "math | chinese | english, required",
   "assignment_type": "string, required", // 具体类型见学科支持的types
   "questions": [
     {
@@ -246,6 +246,7 @@ Content-Type: multipart/form-data 或 application/json
 ```
 
 ### 获取批改结果
+
 **端点**: `GET /api/assignments/{assignment_id}/result`
 
 **响应**:
@@ -259,7 +260,7 @@ Content-Type: multipart/form-data 或 application/json
     "status": "completed",
     "submitted_at": "提交时间",
     "completed_at": "完成时间",
-    "overall_score": 85,    // 注：默认所有作业满分都是100
+    "assignment_score": 85,    // 注：默认所有作业满分都是100
     "feedback": [
       {
         "question_index": 0,

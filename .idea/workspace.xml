@@ -5,7 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bc36699e-268a-4e5e-ad28-1069dc80e378" name="更改" comment="初具雏形">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/data/subjects.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/models/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/models/assignment.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/models/user.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/routes/assignment.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/routes/auth.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/services/assignment_service.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/services/auth_service.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/utils/database.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/api/auth.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/components/HandleRegister.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/stores/userStore.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/views/LoginView.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/views/RegisterView.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/views/UserView.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/API.md" beforeDir="false" afterPath="$PROJECT_DIR$/API.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/api/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/api/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/api/subject.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/SubjectSelector.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/HandleLogin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/router/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/router/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/stores/subjectStore.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/views/SubmitAssignment.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/AssignmentView.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,10 +42,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
-        <option value="Vue Composition API Component" />
         <option value="HTML File" />
+        <option value="Python Script" />
         <option value="JavaScript File" />
+        <option value="Vue Composition API Component" />
       </list>
     </option>
   </component>
@@ -63,13 +90,14 @@
     "Python.app.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "master",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "http.proxy",
+    "settings.editor.selected.configurable": "preferences.sourceCode.JSON",
     "ts.external.directory.path": "E:\\Projects\\automated-homework-correction\\frontend\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   },
@@ -79,6 +107,11 @@
     ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Projects\automated-homework-correction\backend\data" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -98,7 +131,10 @@
       <workItem from="1764077478323" duration="5566000" />
       <workItem from="1764131735014" duration="3208000" />
       <workItem from="1764135765353" duration="8370000" />
-      <workItem from="1764151031529" duration="570000" />
+      <workItem from="1764151031529" duration="758000" />
+      <workItem from="1764232301663" duration="3932000" />
+      <workItem from="1764236295947" duration="1948000" />
+      <workItem from="1764306841055" duration="12640000" />
     </task>
     <task id="LOCAL-00001" summary="hello world">
       <option name="closed" value="true" />
@@ -132,11 +168,30 @@
       <option name="project" value="LOCAL" />
       <updated>1764151383722</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="初具雏形">
+      <option name="closed" value="true" />
+      <created>1764151644282</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1764151644282</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="hello world" />

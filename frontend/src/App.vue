@@ -3,15 +3,19 @@
 <template>
   <div>
     <header>
-      <h1>
+      <h1 style="font-size: xxx-large">
         AI 驱动的作业批改平台
       </h1>
       <router-link to="/">首页</router-link>
       <router-link to="/submit">提交作业</router-link>
       <router-link to="/history">历史记录</router-link>
+      <router-link to="/user">用户信息</router-link>
+      <router-link to="/login">登录</router-link>
+      <router-link to="/register">注册</router-link>
     </header>
 
     <main>
+<!--      使用router切换页面-->
       <router-view />
     </main>
 
