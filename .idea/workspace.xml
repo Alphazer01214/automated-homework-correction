@@ -4,35 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bc36699e-268a-4e5e-ad28-1069dc80e378" name="更改" comment="初具雏形">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/data/subjects.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/models/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/models/assignment.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/models/user.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/routes/assignment.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/routes/auth.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/assignment_service.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/auth_service.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/utils/database.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/api/auth.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/HandleRegister.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/stores/userStore.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/views/LoginView.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/views/RegisterView.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/views/UserView.vue" afterDir="false" />
+    <list default="true" id="bc36699e-268a-4e5e-ad28-1069dc80e378" name="更改" comment="初具雏形，且在app.py大改之前">
+      <change afterPath="$PROJECT_DIR$/backend/config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.md" beforeDir="false" afterPath="$PROJECT_DIR$/API.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/data/subjects.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/instance/assignments.db" beforeDir="false" afterPath="$PROJECT_DIR$/backend/instance/assignments.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/assignment.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/assignment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routes/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/auth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/services/auth_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/auth_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/utils/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/utils/database.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/api/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/api/request.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/api/request.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/api/subject.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/SubjectSelector.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/HandleLogin.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/router/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/router/index.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/stores/subjectStore.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/views/SubmitAssignment.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/AssignmentView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/stores/userStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/stores/userStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/views/LoginView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/LoginView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/views/RegisterView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/RegisterView.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/views/UserView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/UserView.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,9 +31,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
-        <option value="Python Script" />
         <option value="JavaScript File" />
         <option value="Vue Composition API Component" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -88,6 +76,8 @@
     "DefaultHtmlFileTemplate": "HTML File",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Python.app.executor": "Run",
+    "Python.config.executor": "Run",
+    "Python.database.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -134,7 +124,7 @@
       <workItem from="1764151031529" duration="758000" />
       <workItem from="1764232301663" duration="3932000" />
       <workItem from="1764236295947" duration="1948000" />
-      <workItem from="1764306841055" duration="12640000" />
+      <workItem from="1764306841055" duration="21039000" />
     </task>
     <task id="LOCAL-00001" summary="hello world">
       <option name="closed" value="true" />
@@ -176,7 +166,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764151644282</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="初具雏形，且在app.py大改之前">
+      <option name="closed" value="true" />
+      <created>1764327412666</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1764327412666</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,7 +194,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="hello world" />
     <MESSAGE value="初具雏形" />
-    <option name="LAST_COMMIT_MESSAGE" value="初具雏形" />
+    <MESSAGE value="初具雏形，且在app.py大改之前" />
+    <option name="LAST_COMMIT_MESSAGE" value="初具雏形，且在app.py大改之前" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -210,6 +209,8 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/automated_homework_correction$app.coverage" NAME="app 覆盖结果" MODIFIED="1764080114918" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend" />
+    <SUITE FILE_PATH="coverage/automated_homework_correction$app.coverage" NAME="app 覆盖结果" MODIFIED="1764338316415" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend" />
+    <SUITE FILE_PATH="coverage/automated_homework_correction$config.coverage" NAME="config 覆盖结果" MODIFIED="1764335097941" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend" />
+    <SUITE FILE_PATH="coverage/automated_homework_correction$database.coverage" NAME="database 覆盖结果" MODIFIED="1764337164592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend/utils" />
   </component>
 </project>

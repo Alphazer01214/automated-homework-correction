@@ -1,5 +1,5 @@
 # 这是认证的具体实现，包括用户的注册与登录
-from backend.models import User
+from backend.models.user import User
 from backend.utils.database import db
 
 class AuthService:

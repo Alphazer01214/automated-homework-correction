@@ -26,7 +26,7 @@ export const userStore = reactive({
             // 登录成功后跳转到首页
             await router.push('/');
         } catch (err) {
-            this.error = err.message || '登录失败，请检查用户名和密码。';
+            this.error = err.data || ' 登录失败，请检查用户名和密码。';
         } finally {
             this.loading = false;
         }
@@ -41,7 +41,7 @@ export const userStore = reactive({
             await router.push('/login');
             // 注册成功后可以自动跳转到登录界面或直接登录
         } catch (err) {
-            this.error = err.message || '注册失败，请稍后重试。';
+            this.error = err.message + '注册失败，请稍后重试。';
         } finally {
             this.loading = false;
         }
@@ -53,9 +53,9 @@ export const userStore = reactive({
         this.isAuthenticated = false;
         localStorage.removeItem('user');
         // 假设有一个用于清除 token 的 API 调用
-        logout();
+        // logout()
 
         // 登出后跳转到用户页面或首页
-        router.push('/user');
+        router.push('/');
     }
 });

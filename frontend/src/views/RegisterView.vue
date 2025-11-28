@@ -10,9 +10,14 @@ const passwordTwo = ref('');
 const handleRegister = async ()=>{
   if(username.value === "" || password.value === "" || password.value === ""){
     message.value = "Invalid username or password";
+    username.value = '';
+    password.value = '';
+    passwordTwo.value = '';
     return;
   }else if(password.value != passwordTwo.value){
     message.value = "Inconsistent password";
+    password.value = '';
+    passwordTwo.value = '';
     return;
   }
   message.value = '';
@@ -34,7 +39,7 @@ const handleRegister = async ()=>{
 <template>
   <h1>这是注册页面</h1>
   <!-- 显示消息 -->
-  <div v-if="message" class="message" :class="{ error: userStore.error }">
+  <div v-if="message" class="message" :class="{ error: userStore.error }" style="color: red">
     {{ message }}
   </div>
 

@@ -89,3 +89,11 @@ def login():
 #             "code": 40004,
 #             "message": "用户不存在"
 #         }), 404
+
+@auth_bp.route('/logout', methods=['POST'])
+def logout():
+    """用户登出，暂时不需要实现，前端删除登录信息即可"""
+    return jsonify({
+        "success": True,
+        "message": "Logged out."
+    }), 400

@@ -1,4 +1,6 @@
-from . import db
+# user.py - 用户模型
+
+from backend.utils.database import db
 from datetime import datetime
 import uuid
 
@@ -11,9 +13,6 @@ class User(db.Model):
     password = db.Column(db.String(200), nullable=False)  # 预留加密长度
     role = db.Column(db.String(20), default='student')  # student, teacher, admin
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-
-    # 关系
-    assignments = db.relationship('Assignment', backref='user_ref', lazy=True)
 
     def to_dict(self):
         return {

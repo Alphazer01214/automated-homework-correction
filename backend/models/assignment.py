@@ -1,4 +1,6 @@
-from . import db
+# assignment.py - 作业模型
+
+from backend.utils.database import db
 from datetime import datetime
 import uuid
 
@@ -7,7 +9,7 @@ class Assignment(db.Model):
     __tablename__ = 'assignments'
 
     id = db.Column(db.String(36), primary_key=True, default=lambda: str(uuid.uuid4()))       # 作业的唯一id
-    user_id = db.Column(db.String(36), db.ForeignKey('users.id'), nullable=True)
+    user_id = db.Column(db.String(36), db.ForeignKey('users.user_id'), nullable=True)
     subject = db.Column(db.String(50), nullable=False)
     assignment_type = db.Column(db.String(50), nullable=False)
     questions = db.Column(db.JSON, nullable=False)                    # 问题（JSON）包括了问题与用户答案
