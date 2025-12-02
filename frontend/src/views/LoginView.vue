@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ref} from "vue";
-import {userStore} from '@/stores/userStore';
+import {userStore} from '@/stores/userStore.ts';
 
 const message = ref('');
 const username = ref('');

@@ -1,3 +1,3 @@
 // src/api/index.js
 // 可直接import from '@/api'
-export * from './assignment'
+export * from './assignment.js'

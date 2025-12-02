@@ -37,7 +37,7 @@
 
 <script setup>
 import {ref, computed} from "vue";
-import {userStore} from "@/stores/userStore.js";
+import {userStore} from "@/stores/userStore.ts";
 
 const isLoggedIn = computed(() => {
   return userStore.isAuthenticated;
@@ -55,7 +55,7 @@ const logout = userStore.handleLogout;    // 这里不能加括号，否则立�
 </script>
 
 <style>
-// Flex 布局
+ //Flex 布局
 .nav {
   display: flex;
   align-items: center;

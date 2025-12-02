@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ref, computed, watch} from 'vue';
-import {userStore} from "@/stores/userStore";
+import {userStore} from "@/stores/userStore.ts";
 
 const getUserInfo = computed(() => {
   return userStore.user;

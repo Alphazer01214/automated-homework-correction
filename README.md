@@ -100,7 +100,11 @@
   - 进度追踪
   ```
   
--  `UserView.vue` -用户页面：包括查看用户信息、登陆注册等
+- `UserView.vue` -用户页面：包括查看用户信息、登陆注册等
+
+- `LoginView.vue` 
+
+-  `RegisterView.vue`
 
 
 
@@ -108,20 +112,20 @@
 
 用于管理全局信息
 
-- `userStore.js` ：管理用户登录、信息等
+- `userStore.ts` ：管理用户登录、信息等
 
-- `assignmentStore.js` ：管理作业提交、获取结果等
+- `assignmentStore.ts` ：管理作业提交、获取结果等
 
 
 
 ### 4. `api/` - API接口层
 用于与后端沟通
 
-- `request.js` ：这个文件用于配置基础 URL（Flask 地址）、请求超时和响应拦截器。
+- `request.ts` ：这个文件用于配置基础 URL（Flask 地址）、请求超时和响应拦截器。
 - `file.js`：用于上传文件
-- `assignment.js`：用于处理作业
-- `index.js`  ： 用于统一管理所有api
-- `auth.js` ： 认证相关
+- `assignment.ts`：用于处理作业
+- `index.ts`  ： 用于统一管理所有api
+- `auth.ts` ： 认证相关
 
 
 

@@ -1,4 +1,4 @@
-// stores/userStore.js
+// stores/userStore.ts
 import { reactive } from 'vue';
 import { login, register, logout } from '@/api/auth';
 import router from '@/router';
@@ -13,14 +13,14 @@ export const userStore = reactive({
     error: null,   // string: 错误消息
 
     // Actions
-    async handleLogin(username, password) {
+    async handleLogin(username: string, password: string) {
         this.loading = true;
         this.error = null;
         try {
             const data = await login(username, password);
             this.user = data.data;
             this.isAuthenticated = true;
-            localStorage.setItem('user', JSON.stringify(data.data));  // localStorage本地化信息（浏览器）
+            localStorage.setItem('user', JSON.stringify(data.data));  // localStorage存储本地化信息（浏览器），使用setItem方法
             // 可以在这里处理 token 存储和请求头设置
 
             // 登录成功后跳转到首页
@@ -32,7 +32,7 @@ export const userStore = reactive({
         }
     },
 
-    async handleRegister(username, password) {
+    async handleRegister(username: string, password: string) {
         this.loading = true;
         this.error = null;
         try {
@@ -59,3 +59,4 @@ export const userStore = reactive({
         router.push('/');
     }
 });
+

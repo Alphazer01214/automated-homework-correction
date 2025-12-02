@@ -1,4 +1,4 @@
-// 前后端通信的核心文件
+// 前后端通信的核心文件 request.ts
 import axios from 'axios';
 
 const service = axios.create({

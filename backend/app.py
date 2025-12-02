@@ -4,7 +4,7 @@ from config import Config
 from backend.utils.database import init_db     # 注意导入都要从backend开始！！！！！否则会循环引用/引用不一样的对象（见model/assignment, user的导入方式）
 import os
 from routes.auth import auth_bp
-
+from routes.assignment import assignment_bp
 
 
 def create_app():
@@ -19,6 +19,7 @@ def create_app():
 
     # 注册
     app.register_blueprint(auth_bp)
+    app.register_blueprint(assignment_bp)
 
     return app
 

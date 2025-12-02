@@ -153,21 +153,18 @@ Authorization: Bearer {token}
         "id": "math",
         "name": "数学",
         "description": "数学作业批改",
-        "assignment_types": ["calculation", "proof", "application"],
         "input_components": ["MathAnswerInput", "ImageUpload"]
       },
       {
         "id": "chinese",
         "name": "语文", 
         "description": "语文作业批改",
-        "assignment_types": ["composition", "reading", "poetry"],
         "input_components": ["ChineseAnswerInput", "ImageUpload"]
       },
       {
         "id": "english",
         "name": "英语",
         "description": "英语作业批改", 
-        "assignment_types": ["composition", "reading", "translation"],
         "input_components": ["EnglishAnswerInput", "ImageUpload"]
       }
     ]
@@ -191,14 +188,12 @@ Content-Type: multipart/form-data 或 application/json
 ```json
 {
   "subject": "math | chinese | english, required",
-  "assignment_type": "string, required", // 具体类型见学科支持的types
   "questions": [
     {
       "question": "string, required", // 题目内容
       "student_answer": "string, required", // 学生答案
       "image_file": "base64编码图片或文件对象, optional",
       "question_type": "string, optional", // 题目类型细分
-      "max_score": "number, optional" // 题目满分
     }
   ],
   "user_id": "string, optional", // 如果已登录可省略
@@ -311,7 +306,6 @@ Content-Type: multipart/form-data 或 application/json
       {
         "assignment_id": "作业ID",
         "subject_id": "math",
-        "assignment_type": "calculation",
         "title": "作业标题",
         "overall_score": 85,
         "status": "completed",

@@ -1,12 +1,13 @@
-import request from "@/api/request.js";
+import request from "@/api/request.ts";
 
 const AUTH_URL = '/auth';
 
-export function login(username, password) {
+// 用户
+export function login(username: string, password: string) {
   return request.post(`${AUTH_URL}/login`, { username, password });
 }
 
-export function register(username, password) {
+export function register(username: string, password: string) {
     return request.post(`${AUTH_URL}/register`, { username, password });
 }
 
