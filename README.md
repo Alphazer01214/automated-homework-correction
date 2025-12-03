@@ -5,6 +5,27 @@
 
 后端使用Flask
 
+## 使用
+
+这个项目用PyCharm打开，首先在backend中新建 `.env` 文件，输入：
+
+```
+API_KEY=llm_api_key
+API_BASE_URL=https://api.deepseek.com
+API_MODEL_NAME=deepseek-reasoner
+```
+
+其中， API_KEY需要自行替换（不重要）。
+
+运行backend/app.py，然后在Terminal里写：
+
+```
+cd frontend
+npm run dev
+```
+
+访问命令行里的链接，不出意外应该是 `Local:   http://localhost:5173/` 。
+
 ## 前端框架
 
 ### 1. `components/` -可复用组件
@@ -20,43 +41,6 @@
   - 提交数据到后端
   ```
 
-- `ImageUpload.vue` - 图片上传组件
-  ```vue
-  作用：处理图片上传和预览
-  功能：
-  - 拖拽上传
-  - 图片预览
-  - 图片裁剪
-  - 多图上传
-  ```
-
-- `ResultPanel.vue` - 批改结果展示
-  
-  ```vue
-  作用：显示AI批改结果
-  功能：
-  - 分数展示
-  - 分项评分
-  - 批注展示
-  - 改进建议
-  ```
-  
-- `LoadingSpinner.vue` - 加载状态组件
-  
-  ```vue
-  作用：显示加载中的状态
-  功能：
-  - 全屏加载
-  - 局部加载
-  - 进度提示
-  ```
-  
-- `UserLogin.vue` - 登录/注册组件
-
-- `UserProfile` - 用户信息组件
-
-
-
 
 
 ### 2. `views/` - 页面级组件
@@ -69,7 +53,7 @@
   - 学科选择入口
   ```
   
-- **`SubmitAssignment.vue`** - 作业提交页面
+- **`AssignmentView.vue`** - 作业提交页面
   
   ```vue
   作用：主要的作业提交界面
@@ -100,7 +84,7 @@
   - 进度追踪
   ```
   
-- `UserView.vue` -用户页面：包括查看用户信息、登陆注册等
+- `UserView.vue` -用户页面：包括查看用户信息
 
 - `LoginView.vue` 
 
@@ -122,14 +106,16 @@
 用于与后端沟通
 
 - `request.ts` ：这个文件用于配置基础 URL（Flask 地址）、请求超时和响应拦截器。
-- `file.js`：用于上传文件
+- `file.ts`：用于上传文件
 - `assignment.ts`：用于处理作业
 - `index.ts`  ： 用于统一管理所有api
-- `auth.ts` ： 认证相关
+- `auth.ts` ： 登录/注册认证相关
 
 
 
 ### 5. `utils/` - 工具函数
+
+（暂时不需要）
 
 - **`validation.js`** - 表单验证
   
@@ -168,8 +154,6 @@ css
 
 
 
-
-
 ### 7. `assets/` - 静态资源文件
 
 
@@ -178,7 +162,7 @@ css
 
 ### 8. `router/` - 页面切换
 
-
+- `index.ts` ：用于掌控页面切换
 
 
 
@@ -186,7 +170,7 @@ css
 
 ```
 用户操作 → views/ → components/ → stores/ → api/ → 后端
-     ↓          ↓          ↓          ↓         ↓
+ ↓          ↓          ↓          ↓         ↓
 界面交互 → 页面控制 → 组件处理 → 状态更新 → 网络请求
 ```
 
@@ -195,6 +179,12 @@ css
 ## 后端框架
 
 使用Flask，前后端通过 JSON 文本交流。
+
+### 0. `/`
+
+app.py：主程序
+
+config.py：配置程序
 
 ### 1. `models/` - 模型
 
@@ -222,18 +212,17 @@ css
 
 ### 作业
 
-| 字段名              | 数据类型   | 约束     | 默认值              | 描述                                                         |
-| :------------------ | :--------- | :------- | :------------------ | :----------------------------------------------------------- |
-| **id**              | `String`   | **主键** | -                   | 条目的唯一标识符。                                           |
-| **user_id**         | `String`   | 可空     | `NULL`              | 关联的用户标识符。如果系统支持多用户，此字段为必填。         |
-| **subject**         | `String`   | 非空     | -                   | 作业或任务的主题/标题。                                      |
-| **assignment_type** | `String`   | 非空     | -                   | 作业或任务的类型分类。例如：'essay', 'math_problem', 'code_review'。 |
-| **questions**       | `JSON`     | 非空     | -                   | 作业的题目与学生回答。                                       |
-| **model_feedback**  | `JSON`     | 可空     | `NULL`              | 作业的处理结果或输出数据。用于存储结构化的结果，如AI回复、计算答案、处理状态等。 |
-| **status**          | `String`   | -        | `'pending'`         | 条目的当前处理状态。典型工作流：`pending` -> `processing` -> `completed`/`failed`。 |
-| score               | Numeric    | -        | -                   | 作业分数                                                     |
-| **created_at**      | `DateTime` | -        | `datetime.utcnow()` | 记录创建的时间戳（UTC）。                                    |
-| **updated_at**      | `DateTime` | -        | `datetime.utcnow()` | 记录最后更新的时间戳（UTC）。自动更新。                      |
+| 字段名             | 数据类型   | 约束     | 默认值              | 描述                                                         |
+| :----------------- | :--------- | :------- | :------------------ | :----------------------------------------------------------- |
+| **id**             | `String`   | **主键** | -                   | 条目的唯一标识符。                                           |
+| **user_id**        | `String`   | 可空     | `NULL`              | 关联的用户标识符。如果系统支持多用户，此字段为必填。         |
+| **subject**        | `String`   | 非空     | -                   | 作业或任务的主题/标题。                                      |
+| **questions**      | `JSON`     | 非空     | -                   | 作业的题目与学生回答。                                       |
+| **model_feedback** | `JSON`     | 可空     | `NULL`              | 作业的处理结果或输出数据。用于存储结构化的结果，如AI回复、计算答案、处理状态等。 |
+| **status**         | `String`   | -        | `'pending'`         | 条目的当前处理状态。典型工作流：`pending` -> `processing` -> `completed`/`failed`。 |
+| score              | Numeric    | -        | -                   | 作业分数                                                     |
+| **created_at**     | `DateTime` | -        | `datetime.utcnow()` | 记录创建的时间戳（UTC）。                                    |
+| **updated_at**     | `DateTime` | -        | `datetime.utcnow()` | 记录最后更新的时间戳（UTC）。自动更新。                      |
 
 ### 用户
 
@@ -241,11 +230,3 @@ css
 | :------- | :------- | :--- | :--------------- | :----------- |
 | user_id  | String   |      |                  | 用户唯一id   |
 | username | String   |      | Takamatsu_Tomori | 自定义用户名 |
-|          |          |      |                  |              |
-|          |          |      |                  |              |
-|          |          |      |                  |              |
-|          |          |      |                  |              |
-|          |          |      |                  |              |
-|          |          |      |                  |              |
-|          |          |      |                  |              |
-|          |          |      |                  |              |
