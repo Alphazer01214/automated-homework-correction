@@ -12,7 +12,6 @@ class AssignmentService:
         :param data: json {user_id, subject, questions(array)}
         :return: assignment，消息
         """
-
         assignment = Assignment(
             user_id=data.get('user_id'),
             subject=data.get('subject'),

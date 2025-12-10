@@ -5,6 +5,7 @@ from backend.utils.database import init_db     # 注意导入都要从backend开
 import os
 from routes.auth import auth_bp
 from routes.assignment import assignment_bp
+from routes.essay import essay_bp
 
 
 def create_app():
@@ -20,6 +21,7 @@ def create_app():
     # 注册
     app.register_blueprint(auth_bp)
     app.register_blueprint(assignment_bp)
+    app.register_blueprint(essay_bp)
 
     return app
 

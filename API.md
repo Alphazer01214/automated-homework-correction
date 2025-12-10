@@ -136,42 +136,46 @@ Authorization: Bearer {token}
 }
 ```
 
-## 学科信息 API
+## 作文 API
 
-### 获取学科列表
-**端点**: `GET /api/subjects`
+### 提交作文批改
+
+**端点**: `POST /api/essay/submit`
+
+**请求头**:
+
+```
+Authorization: Bearer {token}  # 可选
+Content-Type: multipart/form-data 或 application/json
+```
+
+**请求体**:
+
+```json
+{
+  	"id": string,   // 相同question, student_answer视为同一个id
+    "question": string,
+    "student_answer": string,
+    "ground_truth": string,
+    "model_feedback": string,
+    "edits": Array<Object>  // {username: string, feedback: string}，哪个老师给出什么评论
+}
+```
 
 **响应**:
+
 ```json
 {
   "success": true,
   "code": 200,
-  "message": "获取成功",
+  "message": "提交成功",
   "data": {
-    "subjects": [
-      {
-        "id": "math",
-        "name": "数学",
-        "description": "数学作业批改",
-        "input_components": ["MathAnswerInput", "ImageUpload"]
-      },
-      {
-        "id": "chinese",
-        "name": "语文", 
-        "description": "语文作业批改",
-        "input_components": ["ChineseAnswerInput", "ImageUpload"]
-      },
-      {
-        "id": "english",
-        "name": "英语",
-        "description": "英语作业批改", 
-        "input_components": ["EnglishAnswerInput", "ImageUpload"]
-      }
-    ]
-  },
-  "timestamp": "2024-01-01T00:00:00Z"
+    "id": "自动生成的唯一ID",
+  }
 }
 ```
+
+
 
 ## 作业批改 API
 
@@ -197,12 +201,6 @@ Content-Type: multipart/form-data 或 application/json
     }
   ],
   "user_id": "string, optional", // 如果已登录可省略
-  "metadata": {
-    "title": "string, optional",
-    "description": "string, optional",
-    "deadline": "string, optional", // 截止时间
-    "tags": ["array", "of", "strings"] // 标签
-  }
 }
 ```
 
@@ -248,32 +246,16 @@ Content-Type: multipart/form-data 或 application/json
 ```json
 {
   "success": true,
-  "code": 200,
-  "message": "获取成功",
   "data": {
-    "assignment_id": "作业ID",
+    "id": "作业ID",
+  	"user_id": string
     "status": "completed",
-    "submitted_at": "提交时间",
-    "completed_at": "完成时间",
-    "assignment_score": 85,    // 注：默认所有作业满分都是100
-    "feedback": [
-      {
-        "question_index": 0,
-        "is_correct": true,
-        "score": 100,
-        "detailed_feedback": "解题步骤完整，答案正确",
-        "correct_answer": "x=2或x=3",
-        "knowledge_points": ["一元二次方程", "因式分解法"],
-        "common_mistakes": ["忘记检验根的合理性"],
-        "improvement_suggestions": ["建议加强计算过程的书写规范"]
-      }
-    ],
-    "suggestions": [
-      "建议加强计算过程的书写规范",
-      "注意答题的完整性"
-    ]
-  },
-  "timestamp": "2024-01-01T00:00:00Z"
+    "createded_at": "提交时间",
+    "updated_at": "完成时间",
+    "score": 85,    // 注：默认所有作业满分都是100
+    "questions": [{question}],
+    "model_feedback": []
+  }
 }
 ```
 

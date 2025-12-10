@@ -9,6 +9,7 @@ export const assignmentStore = reactive({
   user: JSON.parse(localStorage.getItem('user')),
   error: null,
   loading: false,
+  showDetail: false,
   assignments: {
     // 一份assignment，包括多个questions，用于提交至后端
 
@@ -30,6 +31,7 @@ export const assignmentStore = reactive({
     student_answer: string;
   }>,
   history: [] as Array<any>,
+  currentAssignmentIndex: 0,
 
   addQuestion(){
     this.questions.push({question: "", student_answer: ""});
@@ -49,6 +51,19 @@ export const assignmentStore = reactive({
 
   },
 
+  showDetailByIndex(index: number) {
+    if(index < 0 || index >= this.questions.length) {
+      this.currentAssignmentIndex = -1;
+      this.showDetail = false;
+      return;
+    }
+    this.showDetail = true;
+    this.currentAssignmentIndex = index;
+    console.log(this.currentAssignmentIndex);
+    console.log(this.history);
+    console.log(this.history[this.currentAssignmentIndex]);
+  },
+
   async handleSubmit(){
     if (this.questions.some(q => !q.question.trim())) {
       alert("爆了")
@@ -63,10 +78,10 @@ export const assignmentStore = reactive({
       this.assignments.user_id = this.user.user_id;
       this.assignments.questions = this.questions;
       const data = await submitAssignment(this.assignments);
-      alert(`${data.data.user_id} Assignment Submitted`)
+      alert(`${this.user.username}'s assignment submitted`)
       this.questions = [{ question: "", student_answer: "" }];
       this.assignments.subject = "";
-      await router.push("/");
+      await router.push("/history");
     } catch (err) {
       console.log(err);
     } finally {
@@ -75,7 +90,14 @@ export const assignmentStore = reactive({
   },
 
   async getHistoryList(){
-    return (await getHistory(this.user.user_id)).data;
+    this.history = (await  getHistory(this.user.user_id)).data;
+    return this.history;
+  },
+
+  async getAssignmentDetailById(id: string){
+    // 传入assignment id， 返回一个obj
+
+
   }
 })
 
