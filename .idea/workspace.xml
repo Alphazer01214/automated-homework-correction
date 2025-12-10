@@ -4,23 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bc36699e-268a-4e5e-ad28-1069dc80e378" name="更改" comment="修改readme">
-      <change afterPath="$PROJECT_DIR$/backend/models/essay.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/routes/essay.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/services/essay_service.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/api/essay.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/AssignmentDetail.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/AssignmentHistory.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/EssayForm.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/stores/essayStore.ts" afterDir="false" />
+    <list default="true" id="bc36699e-268a-4e5e-ad28-1069dc80e378" name="更改" comment="update">
+      <change afterPath="$PROJECT_DIR$/backend/utils/chat.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API.md" beforeDir="false" afterPath="$PROJECT_DIR$/API.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/instance/assignments.db" beforeDir="false" afterPath="$PROJECT_DIR$/backend/instance/assignments.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/assignment.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/assignment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/config.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/services/assignment_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/services/assignment_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/AssignmentDetail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AssignmentDetail.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/AssignmentHistory.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/AssignmentHistory.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/stores/assignmentStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/stores/assignmentStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/views/AssignmentView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/AssignmentView.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/views/HistoryView.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/views/HistoryView.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,9 +24,9 @@
       <list>
         <option value="HTML File" />
         <option value="JavaScript File" />
-        <option value="Python Script" />
         <option value="TypeScript File" />
         <option value="Vue Composition API Component" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -141,7 +132,9 @@
       <workItem from="1764815524477" duration="7143000" />
       <workItem from="1764906999257" duration="1011000" />
       <workItem from="1765262862666" duration="3408000" />
-      <workItem from="1765341508250" duration="2445000" />
+      <workItem from="1765341508250" duration="4857000" />
+      <workItem from="1765346406635" duration="414000" />
+      <workItem from="1765375140288" duration="4854000" />
     </task>
     <task id="LOCAL-00001" summary="hello world">
       <option name="closed" value="true" />
@@ -215,7 +208,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764723653841</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="update">
+      <option name="closed" value="true" />
+      <created>1765344051616</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1765344051617</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -239,7 +240,8 @@
     <MESSAGE value="login, logout, register, userinfo" />
     <MESSAGE value="加入简单的提交、历史记录查询功能" />
     <MESSAGE value="修改readme" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改readme" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -253,7 +255,7 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/automated_homework_correction$app.coverage" NAME="app 覆盖结果" MODIFIED="1765341650271" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend" />
+    <SUITE FILE_PATH="coverage/automated_homework_correction$app.coverage" NAME="app 覆盖结果" MODIFIED="1765381694753" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend" />
     <SUITE FILE_PATH="coverage/automated_homework_correction$config.coverage" NAME="config 覆盖结果" MODIFIED="1764335097941" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend" />
     <SUITE FILE_PATH="coverage/automated_homework_correction$database.coverage" NAME="database 覆盖结果" MODIFIED="1764337164592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/backend/utils" />
   </component>

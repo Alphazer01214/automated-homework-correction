@@ -52,7 +52,7 @@ export const assignmentStore = reactive({
   },
 
   showDetailByIndex(index: number) {
-    if(index < 0 || index >= this.questions.length) {
+    if(index < 0 || index >= this.history.length) {
       this.currentAssignmentIndex = -1;
       this.showDetail = false;
       return;
@@ -90,13 +90,20 @@ export const assignmentStore = reactive({
   },
 
   async getHistoryList(){
-    this.history = (await  getHistory(this.user.user_id)).data;
+    try{
+      this.loading = true;
+      this.history = (await getHistory(this.user.user_id)).data;
+    } catch (err: any){
+      this.error = err.message;
+    }finally {
+      this.loading = false;
+    }
+
     return this.history;
   },
 
   async getAssignmentDetailById(id: string){
     // 传入assignment id， 返回一个obj
-
 
   }
 })

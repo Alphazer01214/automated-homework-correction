@@ -22,3 +22,4 @@ class AssignmentService:
         db.session.commit()
 
         return assignment, "Submitted"
+
