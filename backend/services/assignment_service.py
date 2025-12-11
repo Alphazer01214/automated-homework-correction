@@ -53,4 +53,10 @@ class AssignmentService:
         assignments = Assignment.query.filter_by(user_id=user_id).all()
         return [assignment.to_dict() for assignment in assignments]
 
+    @staticmethod
+    def get_all_data():
+        data = User.query.all()
+        for item in data:
+            print(item.evil_to_dict())
+
 

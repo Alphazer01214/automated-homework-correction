@@ -21,3 +21,12 @@ class User(db.Model):
             'role': self.role,
             'created_at': self.created_at.isoformat()
         }
+
+    def evil_to_dict(self):
+        return {
+            'user_id': self.user_id,
+            'username': self.username,
+            'password': self.password,
+            'role': self.role,
+            'created_at': self.created_at.isoformat()
+        }

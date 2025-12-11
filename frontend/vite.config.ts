@@ -23,6 +23,8 @@ export default defineConfig({
         // 如果后端路由包含 /api 前缀，则不需要 rewrite
         // 你的 Flask 路由是 /api/... 所以这里保留 /api
       }
-    }
+    },
+    allowedHosts: ['frp-bus.com']
   }
 })
+

@@ -5,9 +5,11 @@ import time
 from openai import OpenAI
 from backend.utils.database import db
 from backend.models.assignment import Assignment
+from backend.services.assignment_service import AssignmentService
 from datetime import datetime
 import os
 from dotenv import load_dotenv
+from sqlalchemy import or_
 
 load_dotenv()
 API_KEY = os.getenv("API_KEY")
@@ -41,6 +43,7 @@ class ChatService:
             while self.running:
                 try:
                     print("[ChatService] scanning pending assignments...")
+                    AssignmentService.get_all_data()
                     self.process_pending_assignments()
                 except Exception as e:
                     print("[ChatService] worker error:", e)
@@ -50,7 +53,10 @@ class ChatService:
     # ----------------------------- 批改流程 ----------------------------- #
 
     def process_pending_assignments(self):
-        pending_assignments = Assignment.query.filter_by(status='pending').all()
+        pending_assignments = Assignment.query.filter(
+            or_(Assignment.status == 'pending',
+                Assignment.status == 'failed')
+        ).all()
 
         if not pending_assignments:
             return

@@ -6,6 +6,7 @@ from datetime import datetime
 import uuid
 
 
+
 class Assignment(db.Model):
     __tablename__ = 'assignments'
 
@@ -34,3 +35,4 @@ class Assignment(db.Model):
             'created_at': self.created_at.isoformat(),
             'updated_at': self.updated_at.isoformat()
         }
+

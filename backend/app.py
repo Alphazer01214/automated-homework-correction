@@ -25,7 +25,7 @@ def create_app():
     app.register_blueprint(essay_bp)
 
     with app.app_context():
-        chat_service = ChatService(app, interval=30)
+        chat_service = ChatService(app, interval=20)
 
     return app
 
