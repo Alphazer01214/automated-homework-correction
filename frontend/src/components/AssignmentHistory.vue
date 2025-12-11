@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { assignmentStore } from "@/stores/assignmentStore";
-import { getHistory } from "@/api";
 
 onMounted(async () => {
   await assignmentStore.getHistoryList();
@@ -19,179 +18,189 @@ onMounted(async () => {
       错误: {{ assignmentStore.error }}
     </div>
 
-    <ul v-else-if="assignmentStore.history.length > 0" class="list">
-      <h3 class="subtitle">
+    <div v-else-if="assignmentStore.history.length > 0" class="list">
+
+      <div class="subtitle">
         历史记录：找到
         <strong class="count">{{ assignmentStore.history.length }}</strong>
         条记录
-      </h3>
+      </div>
 
-      <li
+      <div
         v-for="(item, assignment_index) in assignmentStore.history"
         :key="item.id"
-        class="item"
+        class="item card"
       >
-        <!-- 基础信息 -->
-        <div class="info-row">
-          <div class="info-label">科目：</div>
-          <div class="info-value">{{ item.subject }}</div>
+        <!-- 上方：基础信息 -->
+        <div class="info-section">
+          <div class="info-grid">
+            <div class="info-pair">
+              <span class="info-label">科目：</span>
+              <span class="info-value">{{ item.subject }}</span>
+            </div>
+
+            <div class="info-pair">
+              <span class="info-label">状态：</span>
+              <span class="info-value">{{ item.status }}</span>
+            </div>
+
+            <div class="info-pair">
+              <span class="info-label">记录 ID：</span>
+              <span class="info-value">{{ item.id }}</span>
+            </div>
+          </div>
         </div>
 
-        <div class="info-row">
-          <div class="info-label">状态：</div>
-          <div class="info-value">{{ item.status }}</div>
-        </div>
+        <!-- 分割线 -->
+        <div class="divider"></div>
 
-        <div class="info-row">
-          <div class="info-label">记录 ID：</div>
-          <div class="info-value">{{ item.id }}</div>
-        </div>
+        <!-- 题目记录 -->
+        <div class="questions-section">
+          <div class="questions-title">题目记录：</div>
 
-        <!-- 题目列表 -->
-        <div class="questions-title">题目记录：</div>
+          <div
+            v-for="(question, question_index) in item.questions"
+            :key="question_index"
+            class="question-item"
+          >
+            <div class="question-header">
+              题目 {{ question_index }}：
+            </div>
 
-        <ul
-          v-for="(question, question_index) in item.questions"
-          :key="question_index"
-          class="question-list"
-        >
-          <div class="question-item">
-            <div class="question-index">题目 {{ question_index }}：</div>
-            <div class="question-text">
+            <div class="question-body">
               <div><span class="q-label">题干：</span>{{ question.question }}</div>
               <div><span class="q-label">学生回答：</span>{{ question.student_answer }}</div>
               <div><span class="q-label">模型反馈：</span>{{ question.model_feedback }}</div>
             </div>
           </div>
-        </ul>
 
-        <!-- 按钮 -->
-        <button
-          @click="assignmentStore.showDetailByIndex(assignment_index)"
-          class="btn"
-        >
-          查看作业 {{ assignment_index + 1 }} 详情
-        </button>
-      </li>
+        </div>
 
-    </ul>
+        <!-- 下方按钮 -->
+        <div class="btn-wrapper">
+          <button
+            v-if="item.model_feedback"
+            @click="assignmentStore.showDetailByIndex(assignment_index)"
+            class="btn detail-btn"
+          >
+            查看作业 {{ assignment_index + 1 }} 详情
+          </button>
+        </div>
+
+      </div>
+    </div>
 
     <div v-else class="empty">无记录。</div>
+
   </div>
 </template>
 
 <style scoped>
-/* 整体布局 */
+/* 页面结构 */
 .container {
-  max-width: 800px;
-  margin: 20px auto;
-  padding: 12px;
-  font-family: "Segoe UI", Helvetica, Arial;
-  line-height: 1.6;
+  padding: 20px;
+  max-width: 900px;
+  margin: auto;
 }
 
-/* 标题样式 */
 .title {
-  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
   margin-bottom: 20px;
-  color: #333;
 }
 
-/* 副标题 */
-.subtitle {
-  margin-bottom: 15px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #555;
-}
-
-/* 数量高亮 */
-.count {
-  color: #4aa3df;
-}
-
-/* 状态消息 */
+/* 状态提示 */
 .loading,
 .error,
 .empty {
-  padding: 10px 15px;
-  border-radius: 8px;
-  margin-top: 10px;
-}
-
-.loading {
-  background: #eaf6ff;
-  color: #1b6aa8;
+  font-size: 16px;
+  margin-top: 20px;
+  text-align: center;
 }
 
 .error {
-  background: #ffe8e8;
-  color: #d02626;
+  color: #d93025;
 }
 
 .empty {
-  background: #f4f4f4;
-  color: #666;
+  color: #555;
 }
 
-/* 列表整体 */
+/* 历史列表 */
 .list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-/* 每条记录卡片 */
-.item {
-  background: #fff;
-  padding: 16px;
-  margin-bottom: 18px;
-  border-radius: 10px;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-/* 信息行排版 */
-.info-row {
+.subtitle {
+  font-size: 16px;
+}
+
+.count {
+  color: #1a73e8;
+}
+
+/* 卡片结构 */
+.card {
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e4e4e4;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* 基础信息布局：三列 */
+.info-section {
+  margin-bottom: 10px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+}
+
+.info-pair {
   display: flex;
-  margin-bottom: 6px;
-  font-size: 15px;
+  align-items: center;
 }
 
 .info-label {
-  width: 80px;
-  color: #666;
   font-weight: 600;
+  min-width: 70px;
+  color: #444;
 }
 
 .info-value {
   color: #333;
 }
 
-/* 题目部分样式 */
+/* 分割线 */
+.divider {
+  height: 1px;
+  background: #e5e5e5;
+  margin: 14px 0;
+}
+
+/* 题目模块 */
 .questions-title {
-  margin-top: 12px;
-  margin-bottom: 6px;
-  font-weight: bold;
-  color: #444;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
 
-/* 单条题目布局 */
 .question-item {
-  padding: 8px 10px;
-  background: #f8fafc;
-  border-radius: 6px;
-  border-left: 4px solid #acd2ff;
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  background: #fafafa;
+  padding: 12px;
+  margin-bottom: 12px;
 }
 
-.question-index {
-  font-weight: bold;
-  margin-bottom: 4px;
-  color: #4a81c4;
-}
-
-.question-text div {
-  margin: 3px 0;
-  color: #444;
+.question-header {
+  font-weight: 600;
+  margin-bottom: 6px;
 }
 
 .q-label {
@@ -199,27 +208,23 @@ onMounted(async () => {
   color: #555;
 }
 
-/* 去除内层 UL 的默认样式 */
-.question-list {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 10px;
+/* 按钮 */
+.btn-wrapper {
+  margin-top: 12px;
+  text-align: right;
 }
 
-/* 按钮 */
-.btn {
-  margin-top: 12px;
-  padding: 6px 12px;
-  background: #4aa3df;
+.detail-btn {
+  padding: 8px 14px;
   border: none;
-  color: white;
+  background: #3a6ff7;
+  color: #fff;
   border-radius: 6px;
   cursor: pointer;
-  transition: 0.2s;
+  font-size: 14px;
 }
 
-.btn:hover {
-  background: #3b8cc8;
+.detail-btn:hover {
+  background: #2a57d8;
 }
-
 </style>

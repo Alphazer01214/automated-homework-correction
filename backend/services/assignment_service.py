@@ -23,3 +23,34 @@ class AssignmentService:
 
         return assignment, "Submitted"
 
+    @staticmethod
+    def delete_all_assignments():
+        """删除所有作业记录"""
+        try:
+            # 使用原生 SQL 删除所有记录（更高效）
+            db.session.query(Assignment).delete()
+            db.session.commit()
+            return True, "成功删除所有作业记录"
+        except Exception as e:
+            db.session.rollback()
+            return False, f"删除失败: {str(e)}"
+
+    @staticmethod
+    def delete_assignments_by_user_id(user_id):
+        """删除指定用户的所有作业"""
+        try:
+            # 查找并删除该用户的所有作业
+            deleted_count = Assignment.query.filter_by(user_id=user_id).delete()
+            db.session.commit()
+            return True, f"成功删除用户 {user_id} 的 {deleted_count} 条作业记录"
+        except Exception as e:
+            db.session.rollback()
+            return False, f"删除失败: {str(e)}"
+
+    @staticmethod
+    def get_assignments_by_user_id(user_id: str) -> list:
+        """<UNK>"""
+        assignments = Assignment.query.filter_by(user_id=user_id).all()
+        return [assignment.to_dict() for assignment in assignments]
+
+

@@ -37,10 +37,9 @@ def submit():
 @assignment_bp.route('/history', methods=['GET'])
 def get_history():
     user_id = request.args.get('user_id')
-    assignments = Assignment.query.filter_by(user_id=user_id).all()
-    for assignment in assignments:
-        print(assignment.to_dict())
+    assignments = AssignmentService.get_assignments_by_user_id(user_id)
+    print(assignments)
     return jsonify({
         "success": True,
-        "data": [assignment.to_dict() for assignment in assignments]
+        "data": assignments
     })

@@ -9,65 +9,50 @@ import {assignmentStore} from "@/stores/assignmentStore.ts";
 <template>
   <h1>与查询相关功能的页面</h1>
 
-  <div class="container">
-    <div class="assignment-history">
+  <div class="container row-layout">
+
+    <div class="assignment-history panel">
       <AssignmentHistory />
     </div>
 
-    <div class="assignment-detail">
+    <div class="assignment-detail panel">
       <AssignmentDetail />
     </div>
+
   </div>
 </template>
 
 <style scoped>
-.container {
+/* 主容器左右排版 */
+.row-layout {
   display: flex;
-  height: calc(100vh - 100px); /* 减去标题高度 */
-  gap: 20px; /* 左右块之间的间距 */
+  gap: 20px;
   margin-top: 20px;
 }
 
+/* 每个模块的包裹区域 */
+.panel {
+  flex: 1;
+  padding: 16px;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+/* 左右比例可微调 */
 .assignment-history {
-  flex: 1; /* 占据剩余空间的1份 */
-  min-width: 300px; /* 最小宽度 */
-  max-width: 40%; /* 最大宽度 */
-  overflow-y: auto; /* 如果内容超出高度，显示滚动条 */
-  padding: 20px;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  flex: 1.2; /* 左边稍宽 */
 }
 
 .assignment-detail {
-  flex: 2; /* 占据剩余空间的2份，所以右边是左边的2倍宽 */
-  overflow-y: auto;
-  padding: 20px;
-  background-color: white;
-  border-radius: 8px;
-  border: 1px solid #e9ecef;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  flex: 1.8; /* 右边更宽，可调 */
 }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .container {
+/* 小屏幕自动变上下排版 */
+@media (max-width: 900px) {
+  .row-layout {
     flex-direction: column;
-    height: auto;
   }
-
-  .assignment-history,
-  .assignment-detail {
-    max-width: 100%;
-    min-width: 100%;
-  }
-}
-
-h1 {
-  margin-bottom: 20px;
-  color: #333;
-  font-size: 24px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #007bff;
 }
 </style>

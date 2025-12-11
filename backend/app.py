@@ -2,6 +2,7 @@
 from flask import Flask
 from config import Config
 from backend.utils.database import init_db     # 注意导入都要从backend开始！！！！！否则会循环引用/引用不一样的对象（见model/assignment, user的导入方式）
+from backend.services.chat_service import ChatService
 import os
 from routes.auth import auth_bp
 from routes.assignment import assignment_bp
@@ -22,6 +23,9 @@ def create_app():
     app.register_blueprint(auth_bp)
     app.register_blueprint(assignment_bp)
     app.register_blueprint(essay_bp)
+
+    with app.app_context():
+        chat_service = ChatService(app, interval=30)
 
     return app
 
