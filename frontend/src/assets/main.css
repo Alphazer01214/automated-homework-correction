@@ -1,0 +1,78 @@
+@import './base.css';
+
+/* 整体容器 */
+#app {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: var(--spacing-section) var(--spacing-block);
+  flex: 1; /* 让 footer 在页面底部 */
+}
+
+/* -------------------------
+   导航栏（更明显的分区）
+-------------------------- */
+nav {
+  padding: 1rem 0;
+  margin-bottom: var(--spacing-section);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  color: #2e8fff;
+  padding: 2px 4px;
+  border-radius: 6px;
+  transition: var(--transition);
+}
+
+a:hover {
+  background: rgba(46, 143, 255, 0.12);
+}
+
+/* -------------------------
+   主体区：main + sidebar
+-------------------------- */
+
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-section);
+}
+
+/* 主体内容（左边） */
+.main-content {
+  background: var(--color-bg-soft);
+  padding: var(--spacing-block);
+  border-radius: var(--radius-large);
+  border: 1px solid var(--color-border);
+}
+
+/* 侧边栏（右边） */
+.sidebar {
+  background: var(--color-bg-muted);
+  padding: var(--spacing-block);
+  border-radius: var(--radius-large);
+  border: 1px solid var(--color-border);
+}
+
+/* 桌面布局 */
+@media (min-width: 1024px) {
+  .main-wrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2.5rem;
+  }
+}
+
+/* -------------------------
+   Footer 固定在页面底部
+-------------------------- */
+footer {
+  margin-top: var(--spacing-section);
+  padding: 1.2rem 0;
+  text-align: center;
+  color: var(--color-text-soft);
+  border-top: 1px solid var(--color-border);
+}
