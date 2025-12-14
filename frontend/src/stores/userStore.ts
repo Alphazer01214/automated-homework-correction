@@ -50,7 +50,7 @@ export const userStore = reactive({
         }
     },
 
-    handleLogout() {
+    async handleLogout() {
         // 清除本地存储和状态
         this.user.value = null;
         // this.isAuthenticated.value = false;
@@ -59,7 +59,7 @@ export const userStore = reactive({
         // logout()
 
         // 登出后跳转到用户页面或首页
-        router.push('/');
+        await router.push('/');
         window.location.reload();
     }
 });

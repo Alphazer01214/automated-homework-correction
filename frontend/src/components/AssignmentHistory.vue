@@ -5,7 +5,28 @@ import { assignmentStore } from "@/stores/assignmentStore";
 onMounted(async () => {
   await assignmentStore.getHistoryList();
 });
+
+/* ===== 长文本展开控制 ===== */
+const expandedMap = ref<Record<string, boolean>>({});
+
+const TEXT_LIMIT = 120;
+
+const isLongText = (text?: string) => {
+  return text && text.length > TEXT_LIMIT;
+};
+
+const toggleText = (key: string) => {
+  expandedMap.value[key] = !expandedMap.value[key];
+};
+
+const getDisplayText = (text: string, key: string) => {
+  if (!isLongText(text)) return text;
+  return expandedMap.value[key]
+    ? text
+    : text.slice(0, TEXT_LIMIT) + '...';
+};
 </script>
+
 
 <template>
   <h2 class="title">这里查询当前账户的历史记录</h2>
@@ -68,9 +89,56 @@ onMounted(async () => {
             </div>
 
             <div class="question-body">
-              <div><span class="q-label">题干：</span>{{ question.question }}</div>
-              <div><span class="q-label">学生回答：</span>{{ question.student_answer }}</div>
-              <div><span class="q-label">模型反馈：</span>{{ question.model_feedback }}</div>
+              <div class="question-body">
+  <!-- 题干 -->
+  <div>
+    <span class="q-label">题干：</span>
+    {{ getDisplayText(
+      question.question,
+      item.id + '-' + question_index + '-q'
+    ) }}
+    <span
+      v-if="isLongText(question.question)"
+      class="toggle-text"
+      @click="toggleText(item.id + '-' + question_index + '-q')"
+    >
+      {{ expandedMap[item.id + '-' + question_index + '-q'] ? '收起' : '展开' }}
+    </span>
+  </div>
+
+  <!-- 学生回答 -->
+  <div>
+    <span class="q-label">学生回答：</span>
+    {{ getDisplayText(
+      question.student_answer,
+      item.id + '-' + question_index + '-a'
+    ) }}
+    <span
+      v-if="isLongText(question.student_answer)"
+      class="toggle-text"
+      @click="toggleText(item.id + '-' + question_index + '-a')"
+    >
+      {{ expandedMap[item.id + '-' + question_index + '-a'] ? '收起' : '展开' }}
+    </span>
+  </div>
+
+  <!-- 模型反馈 -->
+  <div v-if="question.model_feedback">
+    <span class="q-label">模型反馈：</span>
+    {{ getDisplayText(
+      question.model_feedback,
+      item.id + '-' + question_index + '-f'
+    ) }}
+    <span
+      v-if="isLongText(question.model_feedback)"
+      class="toggle-text"
+      @click="toggleText(item.id + '-' + question_index + '-f')"
+    >
+      {{ expandedMap[item.id + '-' + question_index + '-f'] ? '收起' : '展开' }}
+    </span>
+  </div>
+</div>
+
             </div>
           </div>
 
@@ -101,7 +169,11 @@ onMounted(async () => {
   padding: 20px;
   max-width: 900px;
   margin: auto;
+
+  height: 114vh;          /* 固定高度（相对视口） */
+  overflow-y: auto;      /* 开启纵向滚动 */
 }
+
 
 .title {
   font-size: 22px;
@@ -227,4 +299,17 @@ onMounted(async () => {
 .detail-btn:hover {
   background: #2a57d8;
 }
+
+.toggle-text {
+  margin-left: 6px;
+  color: #1a73e8;
+  cursor: pointer;
+  font-size: 13px;
+  user-select: none;
+}
+
+.toggle-text:hover {
+  text-decoration: underline;
+}
+
 </style>

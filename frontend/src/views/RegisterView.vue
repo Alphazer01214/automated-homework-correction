@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import {ref} from "vue";
-import {userStore} from '@/stores/userStore.ts';
+import { ref } from "vue";
+import { userStore } from '@/stores/userStore.ts';
 
-const message = ref('')
+const message = ref('');
 const username = ref('');
 const password = ref('');
 const passwordTwo = ref('');
 
-const handleRegister = async ()=>{
-  if(username.value === "" || password.value === "" || passwordTwo.value === ""){
+const handleRegister = async () => {
+  if (username.value === "" || password.value === "" || passwordTwo.value === "") {
     message.value = "Invalid username or password";
     username.value = '';
     password.value = '';
     passwordTwo.value = '';
     return;
-  }else if(password.value != passwordTwo.value){
+  } else if (password.value != passwordTwo.value) {
     message.value = "Inconsistent password";
     password.value = '';
     passwordTwo.value = '';
@@ -23,136 +23,191 @@ const handleRegister = async ()=>{
 
   message.value = '';
   userStore.error = null;
-  await userStore.handleRegister(username.value, password.value, passwordTwo.value);
+  await userStore.handleRegister(username.value, password.value);
 
-  if(userStore.error){
+  if (userStore.error) {
     message.value = userStore.error;
-  }else{
+  } else {
     message.value = 'Successfully registered!';
     username.value = '';
     password.value = '';
     passwordTwo.value = '';
   }
-}
+};
 </script>
 
 <template>
-  <h1 class="title">这是注册页面</h1>
+  <div class="register-page">
+    <h1 class="title">创建你的账号</h1>
+    <p class="subtitle">加入 AI 作业批改平台，开启高效学习体验</p>
 
-  <!-- 显示消息 -->
-  <div v-if="message" class="message" :class="{ error: userStore.error }">
-    {{ message }}
+    <!-- 显示消息 -->
+    <div v-if="message" class="message" :class="{ error: userStore.error, success: !userStore.error }">
+      {{ message }}
+    </div>
+
+    <form @submit.prevent="handleRegister" class="register-form form-card">
+
+      <div class="input-group">
+        <label for="username">用户名</label>
+        <input
+          type="text"
+          id="username"
+          v-model="username"
+          placeholder="请输入用户名"
+          required
+          autocomplete="username"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="password">密码</label>
+        <input
+          type="password"
+          id="password"
+          v-model="password"
+          placeholder="请输入密码"
+          required
+          autocomplete="new-password"
+        />
+      </div>
+
+      <div class="input-group">
+        <label for="password-two">确认密码</label>
+        <input
+          type="password"
+          id="password-two"
+          v-model="passwordTwo"
+          placeholder="再次输入密码"
+          required
+          autocomplete="new-password"
+        />
+      </div>
+
+      <button type="submit" class="btn">注册账号</button>
+
+      <div class="form-footer">
+        <span>已有账号？</span>
+        <RouterLink to="/login">立即登录</RouterLink>
+      </div>
+    </form>
   </div>
-
-  <form @submit.prevent="handleRegister" class="register-form form-card">
-
-    <div class="input-group">
-      <label for="username">Username</label>
-      <input
-        type="text"
-        id="username"
-        v-model="username"
-        required
-        autocomplete="username"
-      >
-    </div>
-
-    <div class="input-group">
-      <label for="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        v-model="password"
-        required
-        autocomplete="new-password"
-      >
-    </div>
-
-    <div class="input-group">
-      <label for="password-two">Confirm Password</label>
-      <input
-        type="password"
-        id="password-two"
-        v-model="passwordTwo"
-        required
-        autocomplete="new-password"
-      >
-    </div>
-
-    <button type="submit" class="btn">Register</button>
-  </form>
 </template>
 
 <style scoped>
+.register-page {
+  min-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: fadeUp 0.6s ease-out;
+}
+
 /* 标题 */
 .title {
-  text-align: center;
-  margin-bottom: 20px;
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #6e6e73;
+  margin-bottom: 24px;
 }
 
 /* 提示信息 */
 .message {
+  width: 100%;
+  max-width: 420px;
   text-align: center;
-  margin-bottom: 12px;
-  padding: 8px 12px;
-  border-radius: 6px;
-  color: #d93025;
-}
-.message.error {
-  background: #ffe5e5;
+  margin-bottom: 14px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 14px;
 }
 
-/* 卡片区域 */
+.message.error {
+  background: #ffe5e5;
+  color: #d93025;
+}
+
+.message.success {
+  background: #e6f4ea;
+  color: #137333;
+}
+
+/* 卡片 */
 .form-card {
-  max-width: 380px;
-  margin: 0 auto;
-  padding: 22px 26px;
-  border-radius: 14px;
-  background: #fff;
-  border: 1px solid #e4e4e4;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+  width: 100%;
+  max-width: 420px;
+  padding: 32px 34px 28px;
+  border-radius: 20px;
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
 }
 
 /* 输入组 */
 .input-group {
   display: flex;
   flex-direction: column;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .input-group label {
   font-size: 14px;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
   color: #444;
 }
 
 .input-group input {
-  padding: 10px 12px;
-  font-size: 14px;
-  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 15px;
+  border-radius: 10px;
   border: 1px solid #ccc;
+  transition: 0.2s;
 }
 
 .input-group input:focus {
   outline: none;
-  border-color: #3a6ff7;
-  box-shadow: 0 0 0 2px rgba(58,111,247,0.15);
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 3px rgba(26,115,232,0.15);
 }
 
 /* 按钮 */
 .btn {
   width: 100%;
-  padding: 10px 14px;
-  background: #3a6ff7;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, #1a73e8, #3a8bfd);
   border: none;
   color: #fff;
-  font-size: 15px;
-  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 999px;
   cursor: pointer;
   margin-top: 8px;
+  transition: 0.25s;
 }
 
 .btn:hover {
-  background: #255de5;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(26,115,232,0.35);
+}
+
+/* 底部 */
+.form-footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+}
+
+.form-footer a {
+  margin-left: 6px;
+  color: #1a73e8;
+  text-decoration: none;
+  font-weight: 500;
 }
 </style>

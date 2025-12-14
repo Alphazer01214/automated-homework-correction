@@ -7,6 +7,7 @@ import os
 from routes.auth import auth_bp
 from routes.assignment import assignment_bp
 from routes.essay import essay_bp
+import sys
 
 
 def create_app():

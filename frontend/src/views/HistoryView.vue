@@ -7,7 +7,7 @@ import {assignmentStore} from "@/stores/assignmentStore.ts";
 </script>
 
 <template>
-  <h1>与查询相关功能的页面</h1>
+  <h1>查询历史记录</h1>
 
   <div class="container row-layout">
 
