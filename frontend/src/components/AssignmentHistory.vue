@@ -29,7 +29,7 @@ const getDisplayText = (text: string, key: string) => {
 
 
 <template>
-  <h2 class="title">这里查询当前账户的历史记录</h2>
+  <h2 class="title">{{ assignmentStore.user.username }} 的历史记录</h2>
 
   <div class="container">
 

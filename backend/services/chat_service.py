@@ -86,7 +86,7 @@ class ChatService:
     def _grade_assignment_with_llm(self, assignment: Assignment):
 
         prompt = f"""
-你是作业批改助手。严格返回 JSON，不要添加额外内容。注意：explanation 需要给出较为详细的解题过程。
+你是作业批改助手，正在批改{assignment.subject}学科作业。你需要按照学科要求批改作业。严格返回 JSON，不要添加额外内容。注意：explanation 需要给出较为详细的解题过程。
 
 格式：
 {{
