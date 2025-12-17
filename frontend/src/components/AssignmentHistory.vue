@@ -155,6 +155,7 @@ const getDisplayText = (text: string, key: string) => {
             查看作业 {{ assignment_index + 1 }} 详情
           </button>
           <button
+            v-if="item.model_feedback"
             @click="assignmentStore.deleteAssignmentById(item.id)"
             class="btn delete-btn"
             >
