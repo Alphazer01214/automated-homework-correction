@@ -20,12 +20,18 @@ API_MODEL_NAME=deepseek-reasoner
 
 运行backend/app.py。
 
-> 注意： python 需要flask, dotenv, openai软件包； Node.js 需要 Vue, Vite, marked, katex 等
+> **注意**： 1. python 需要flask, dotenv, openai软件包； Node.js 需要 Vue, Vite, marked, katex 等。请先配置好相关环境。
+>
+> 2. Python项目的根目录是 backend/ ，需确认根目录设置是否正确，否则会出现无法import的问题。 
+> 3. 后端端口是 localhost:5000，需要确保端口无冲突。
 
-然后在Terminal里写：
+然后在项目根目录的Terminal里写：
 
 ```
-cd frontend
+cd backend
+python app.py
+
+cd ../frontend
 npm run dev
 ```
 
@@ -34,6 +40,15 @@ npm run dev
 
 
 # 前端
+
+## 技术栈
+
+- **前端框架**: Vue 3 + TypeScript
+- **状态管理**: Pinia
+- **路由**: Vue Router
+- **HTTP 客户端**: Axios (通过 `api/request.ts` 配置)
+- **构建工具**: Vite
+- **样式**: CSS
 
 ## 项目结构
 
@@ -126,14 +141,7 @@ npm run dev
 界面交互 → 页面控制 → 组件处理 → 状态更新 → 网络请求 → 数据处理
 ```
 
-## 技术栈
 
-- **前端框架**: Vue 3 + TypeScript
-- **状态管理**: Pinia
-- **路由**: Vue Router
-- **HTTP 客户端**: Axios (通过 `api/request.ts` 配置)
-- **构建工具**: Vite
-- **样式**: CSS
 
 # 后端
 
@@ -179,9 +187,10 @@ npm run dev
 - **`chat_service.py`** - LLM 集成服务
   
 
-## API 设计规范
+# API 设计规范
 
-### 响应格式
+## 响应格式
+
 ```json
 {
   "success": true,
@@ -191,7 +200,8 @@ npm run dev
 }
 ```
 
-### 错误处理
+## 错误处理
+
 ```json
 {
   "success": false,
@@ -203,7 +213,8 @@ npm run dev
 }
 ```
 
-### 常用状态码
+## 常用状态码
+
 - `200` - 成功
 - `201` - 创建成功
 - `400` - 客户端错误（验证失败等）
@@ -214,9 +225,9 @@ npm run dev
 
 
 
-## 数据库设计
+# 数据库设计
 
-### 作业表 (assignments)
+## 作业表 (assignments)
 
 | 字段名              | 数据类型       | 约束                 | 默认值              | 描述                                                         |
 | :------------------ | :------------- | :------------------- | :------------------ | :----------------------------------------------------------- |
@@ -231,7 +242,7 @@ npm run dev
 | **created_at**      | `DateTime`     | **非空**             | `CURRENT_TIMESTAMP` | 记录创建的时间戳。                                           |
 | **updated_at**      | `DateTime`     | **非空**，自动更新   | `CURRENT_TIMESTAMP` | 记录最后更新的时间戳，每次更新时自动更新。                   |
 
-### 用户表 (users)
+## 用户表 (users)
 
 | 字段名         | 数据类型      | 约束                 | 默认值              | 描述                                                         |
 | :------------- | :------------ | :------------------- | :------------------ | :----------------------------------------------------------- |
