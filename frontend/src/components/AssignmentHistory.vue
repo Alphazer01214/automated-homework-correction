@@ -156,7 +156,7 @@ const getDisplayText = (text: string, key: string) => {
           </button>
           <button
             @click="assignmentStore.deleteAssignmentById(item.id)"
-            class="btn detail-btn"
+            class="btn delete-btn"
             >
             删除此作业
           </button>
@@ -297,6 +297,16 @@ const getDisplayText = (text: string, key: string) => {
   padding: 8px 14px;
   border: none;
   background: #3a6ff7;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.delete-btn {
+  padding: 8px 14px;
+  border: none;
+  background: red;
   color: #fff;
   border-radius: 6px;
   cursor: pointer;
