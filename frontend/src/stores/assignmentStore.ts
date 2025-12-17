@@ -1,7 +1,7 @@
 // assignmentStore.ts   作业Store
 
 import {reactive, ref} from "vue";
-import {submitAssignment, getHistory} from "@/api/assignment";
+import {submitAssignment, getHistory, deleteAssignment} from "@/api/assignment";
 import router from "@/router"
 export const assignmentStore = reactive({
   // user: {user_id, username, role, created_at}
@@ -133,6 +133,21 @@ export const assignmentStore = reactive({
 
   async getAssignmentDetailById(id: string) {
     // 按需补
+  },
+
+  async deleteAssignmentById(id: string){
+    try{
+      this.loading = true;
+      await deleteAssignment(id);
+      // this.history = await getHistory(this.user.user_id).data;
+      // localStorage.setItem("history", JSON.stringify(this.history));
+      await router.push('/history');
+      window.location.reload();
+    } catch (err: any){
+      this.error = err.message;
+    } finally {
+      this.loading = false;
+    }
   }
 });
 

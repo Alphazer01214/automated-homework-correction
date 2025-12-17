@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
 import { assignmentStore } from "@/stores/assignmentStore";
+import {it} from "vitest";
 
 onMounted(async () => {
   await assignmentStore.getHistoryList();
@@ -152,6 +153,12 @@ const getDisplayText = (text: string, key: string) => {
             class="btn detail-btn"
           >
             查看作业 {{ assignment_index + 1 }} 详情
+          </button>
+          <button
+            @click="assignmentStore.deleteAssignmentById(item.id)"
+            class="btn detail-btn"
+            >
+            删除此作业
           </button>
         </div>
 

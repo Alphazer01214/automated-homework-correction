@@ -21,3 +21,8 @@ export function getHistory(user_id: string) {
     }
   });
 }
+
+export function deleteAssignment(id: string){
+  return request.post(`${ASSIGNMENT_URL}/delete`,
+    {id: id});
+}

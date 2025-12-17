@@ -48,6 +48,20 @@ class AssignmentService:
             return False, f"删除失败: {str(e)}"
 
     @staticmethod
+    def delete_assignments_by_assignment_id(assignment_id):
+        try:
+            assignment = Assignment.query.filter_by(id=assignment_id).first()
+            if assignment:
+                db.session.delete(assignment)
+                db.session.commit()
+                return True, f"success"
+            return False, f"failed"
+        except Exception as e:
+            db.session.rollback()
+            return False, f"failed"
+
+
+    @staticmethod
     def get_assignments_by_user_id(user_id: str) -> list:
         """<UNK>"""
         assignments = Assignment.query.filter_by(user_id=user_id).all()

@@ -43,3 +43,14 @@ def get_history():
         "success": True,
         "data": assignments
     })
+
+@assignment_bp.route('/delete', methods=['POST'])
+def delete_assignment():
+    data = request.get_json()
+    id = data.get('id')
+    print(f"[assignment] delete {id}")
+    status, message = AssignmentService.delete_assignments_by_assignment_id(id)
+    return jsonify({
+        "success": status,
+        "message": message
+    })
